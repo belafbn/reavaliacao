@@ -8,7 +8,6 @@
     <h:head>
         <title><ui:insert name="titulo"></ui:insert></title>
         <h:outputStylesheet library="css" name="estilos.css"/>
-        <h:outputScript library="js" name="estilos.js"/>
     </h:head>
     <h:body>
         <h:form id="formMenu" prependId="false">
@@ -16,7 +15,7 @@
                 <p:menuitem value="Ínicio"
                             url="#{facesContext.externalContext.requestContextPath}/index.xhtml"
                             icon="pi pi-home"/>
-                <p:submenu label="Cadastros">
+                <p:submenu label="Cadastros" rendered="#{controleLogin.usuarioAutenticado != null}">
                     <p:column>
                         <p:submenu label="Básicos">
                             <p:menuitem action="#{controleEspecialidade.listar()}"
@@ -31,7 +30,36 @@
                              <p:menuitem action="#{controleAluno.listar()}"
                                         value="Manutenção de Aluno"
                                         ajax="false"/>
+                             <p:menuitem action="#{controleDisciplina.listar()}"
+                                        value="Manutenção de Disciplinas"
+                                        ajax="false"/>
+                             <p:menuitem action="#{controleUsuario.listar()}"
+                                        value="Manutenção de Usuario"
+                                        ajax="false"/>
                         </p:submenu>
+                        
+                        <p:submenu label="Curso">
+                            <p:menuitem action="#{controleCurso.listar()}"
+                                        value="Manutenção Cursos"
+                                        ajax="false"/>
+                        </p:submenu>
+                    </p:column>
+                </p:submenu>
+               <p:submenu label="Usuário #{controleLogin.usuarioAutenticado != null ? 
+                                            controleLogin.usuarioAutenticado.nome : ''}">
+                    <p:column>
+                        <p:submenu label="Efetuar Login" 
+                                   rendered="#{controleLogin.usuarioAutenticado == null}">
+                            <p:menuitem action="#{controleLogin.paginaLogin()}"
+                                        value="Login" icon="pi pi-user"
+                                        ajax="false"/>
+                        </p:submenu> 
+                        <p:submenu label="Efetuar Logout" 
+                                   rendered="#{controleLogin.usuarioAutenticado != null}">
+                            <p:menuitem action="#{controleLogin.efetuarLogout()}"
+                                        value="Logout" icon="pi pi-power-off"
+                                        ajax="false"/>
+                        </p:submenu> 
                     </p:column>
                 </p:submenu>
             </p:megaMenu>

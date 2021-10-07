@@ -7,22 +7,22 @@ package br.edu.ifsul.dao;
 
 import br.edu.ifsul.converters.ConverterOrdem;
 import br.edu.ifsul.modelo.Especialidade;
+import br.edu.ifsul.modelo.Notas;
 import java.io.Serializable;
-import javax.ejb.Stateful;
-import br.edu.ifsul.dao.DAOGenerico;
 
 /**
  *
  * @author bela
  */
-@Stateful
-public class DAOEspecialidade<TIPO> extends DAOGenerico<Especialidade> implements Serializable  {
-    public DAOEspecialidade(){
+public class DAONotas <TIPO> extends DAOGenerico<Notas> implements Serializable  {
+     public DAONotas(){
         super();
         classPersistente = Especialidade.class;
         //definindo a lista de ordenações
         listaOrdem.add(new Ordem("id", "ID","="));
-        listaOrdem.add(new Ordem("nome","Nome","like"));
+        listaOrdem.add(new Ordem("nota01","Nota 01","like"));
+        listaOrdem.add(new Ordem("nota02","Nota 02","like"));
+        listaOrdem.add(new Ordem("media","Media","like"));
         //definição da ordem atual
         ordemAtual = listaOrdem.get(1);
         //criando uma instancia do conversor

@@ -27,19 +27,21 @@
                     <p:column headerText="E-mail">
                         <p:outputLabel value="#{obj.email}"/>
                     </p:column>  
-                    <p:column headerText="nascimento">
-                        <p:outputLabel value="#{obj.nascimento}"/>
+                    <p:column headerText="Nascimento">
+                        <p:outputLabel value="#{obj.nascimento}">
+                            <f:converter converterId="converterCalendar"/>
+                        </p:outputLabel>
                     </p:column>  
                                                      
                     <p:column headerText="Ações">
                         <div align="center">
-                            <p:commandButton actionListener="#{controleProfessor.alterar(obj.id)}" 
+                            <p:commandButton actionListener="#{controleAluno.alterar(obj.id)}" 
                                              icon="pi pi-pencil"
                                              title="Editar"
                                              update="formEdicao"
                                              process="@this"
                                              oncomplete="PF('dlg').show();"/>
-                            <p:commandButton actionListener="#{controleProfessor.excluir(obj.id)}"
+                            <p:commandButton actionListener="#{controleAluno.excluir(obj.id)}"
                                              icon="pi pi-trash"
                                              title="Excluir"
                                              update="formListagem"
@@ -55,35 +57,35 @@
                     <div align="center">
                         <p:panelGrid columns="2">
                             <p:outputLabel value="ID"/>
-                            <p:inputText value="#{controleProfessor.objeto.id}"
+                            <p:inputText value="#{controleAluno.objeto.id}"
                                          size="5" readonly="true"/>
                             <p:outputLabel value="Nome" for="txtNome"/>
                             <p:inputText id="txtNome"
-                                         value="#{controleProfessor.objeto.nome}"
+                                         value="#{controleAluno.objeto.nome}"
                                          size="50" maxlength="50"
                                          placeholder="Obrigatório"/>
-                             <p:outputLabel value="email" for="txtemail"/>
+                             <p:outputLabel value="Email" for="txtemail"/>
                             <p:inputText id="txtemail"
-                                         value="#{controleProfessor.objeto.email}"
+                                         value="#{controleAluno.objeto.email}"
                                          size="50" 
                                          placeholder="Obrigatório"/>
-                             <p:outputLabel value="nascimento" for="txtnascimento"/>
+                             <p:outputLabel value="Nascimento" for="txtnascimento"/>
                             <p:calendar id="txtnascimento"
-                                         value="#{controleProfessor.objeto.nascimento}" 
+                                         value="#{controleAluno.objeto.nascimento}" 
                                          mask="true" pattern="dd/MM/yyyy" navigator="true" size="10">
                                         <f:converter converterId="converterCalendar"/>
                             </p:calendar>
-                             <p:outputLabel value="titulacao" for="txttitulacao"/>
+                             <p:outputLabel value="Titulação" for="txttitulacao"/>
                             <p:inputText id="txttitulacao"
                                          value="#{controleProfessor.objeto.titulacao}"
                                          size="50" 
                                          placeholder="Obrigatório"/>
-                             <p:outputLabel value="topicoInteresse" for="txttopicoInteresse"/>
+                             <p:outputLabel value="Tópico Interesse" for="txttopicoInteresse"/>
                             <p:inputText id="txttopicoInteresse"
                                          value="#{controleProfessor.objeto.topicosInteresse}"
                                          size="50" 
                                          placeholder="Obrigatório"/>
-                             <p:outputLabel value="especialidade" for="txtespecialidade"/>
+                             <p:outputLabel value="Especialidade" for="txtespecialidade"/>
                             <p:inputText id="txtespecialidade"
                                          value="#{controleProfessor.objeto.especialidade}"
                                          size="50" 
@@ -93,7 +95,7 @@
                     <p:panel>
                         <div align="center">
                             <p:commandButton value="Salvar" icon="pi pi-save"
-                                             actionListener="#{controleProfessor.salvar()}"
+                                             actionListener="#{controleAluno.salvar()}"
                                              update="formEdicao formListagem"
                             oncomplete="if(!args.validationFailed){PF('dlg').hide();}"/>
                         </div>

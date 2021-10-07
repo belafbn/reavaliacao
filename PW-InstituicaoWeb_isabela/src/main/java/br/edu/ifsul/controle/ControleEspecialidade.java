@@ -8,7 +8,9 @@ package br.edu.ifsul.controle;
 import br.edu.ifsul.dao.DAOEspecialidade;
 import br.edu.ifsul.modelo.Especialidade;
 import br.edu.ifsul.util.Util;
+import br.edu.ifsul.util.UtilRelatorios;
 import java.io.Serializable;
+import java.util.HashMap;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -29,6 +31,10 @@ public class ControleEspecialidade implements Serializable {
     }
     public String listar(){
         return "/privado/especialidade/listar?faces-redirect=true";
+    }
+    public void imprimeEspecialidades(){
+        HashMap parametros = new HashMap();
+        UtilRelatorios.imprimeRelatorio("Blank_A4", parametros, dao.getListaTodos());
     }
 
     public void novo(){
