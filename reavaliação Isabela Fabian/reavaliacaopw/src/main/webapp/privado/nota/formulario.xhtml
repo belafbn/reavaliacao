@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <p:dialog header="Edição" widgetVar="dlg" resizable="false"
+              modal="modal" width="50%" height="100%">
+        <h:form id="formEdicao" prependId="false">
+            <p:growl id="growl"/>
+            <p:tabView id="tab">
+                <p:tab title="Dados Principais">
+                    <div align="center">
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="ID"/>
+                            <p:inputText value="#{controleNota.objeto.id}"
+                                         size="5" readonly="true"/>
+                            <p:outputLabel value="Aluno" for="txtAluno"/>
+                            <p:inputText id="txtAluno"
+                                         value="#{controleNota.objeto.aluno}"
+                                         size="50" maxlength="50"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="Nota" for="txtNota"/>
+                            <p:inputNumber id="txtNota"
+                                           value="#{controleNota.objeto.nota}"
+                               thousandSeparator="" decimalSeparator="."
+                               decimalPlaces="2" size="10" minValue="0" maxValue="10"  />
+                             <p:outputLabel value="Prova" for="selectProva"/>
+                             <p:selectOneMenu value="#{controleNota.objeto.prova}"
+                                             id="selectProva"
+                                             filter="true" filterMatchMode="startsWith">
+                                <f:converter binding="#{converterProva}"/>
+                                <f:selectItem itemLabel="Selecione a prova"
+                                              noSelectionOption="true"/>
+                                <f:selectItems value="#{controleNota.daoProva.listaTodos}"
+                                               var="pro" itemLabel="#{pro.descricao}"/>
+
+                            </p:selectOneMenu>
+                             <p:outputLabel value="Observação: Permitido apenas notas entre 0 e 10"/>
+                           
+                        </p:panelGrid>
+                    </div>
+                </p:tab>
+            </p:tabView>
+
+            <p:panel>
+                <div align="center">
+                    <p:commandButton value="Salvar" icon="pi pi-save"
+                                     actionListener="#{controleNota.salvar()}"
+                                     update="formEdicao formListagem"
+                                     oncomplete="if(!args.validationFailed){PF('dlg').hide();}"/>
+                </div>
+            </p:panel>
+
+        </h:form>    
+    </p:dialog>
+</html>
+
